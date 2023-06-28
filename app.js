@@ -17,4 +17,27 @@ const _getToken = async () => {
   return data.access_token;
 }
 
-_getToken().then(res => console.log(res))
+
+const _searchAlbum = async (token, albumName) => {
+
+  const type = 'album'
+  const limit = 5
+  
+  albumName = albumName.replace(/ /g, '%2520' )
+
+  albumRes = await fetch(`https://api.spotify.com/v1/search?q=${albumName}&type=${type}&limit=${limit}`, {
+    method: 'GET',
+    headers: {
+      'Authorization' :  'Bearer ' + token
+    }
+  })
+
+  const data = await albumRes.json()
+  return data
+}
+
+
+_getToken()
+.then(data => _searchAlbum(data, 'Dark Side Of The Moon'))
+.then(data => console.log(data.albums.items))
+
