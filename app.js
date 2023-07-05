@@ -36,8 +36,18 @@ const _searchAlbum = async (token, albumName) => {
   return data
 }
 
+const list = document.querySelector('#album-list')
+const albumItem = document.createElement('li')
+const tempoAlbumName = document.createElement('img')
 
 _getToken()
-.then(data => _searchAlbum(data, 'Dark Side Of The Moon'))
-.then(data => console.log(data.albums.items))
+.then(data => _searchAlbum(data, 'The White Album'))
+.then(data => displayAlbums(data.albums.items))
 
+
+
+function displayAlbums(albumsList){
+  albumsList.forEach(element => {
+    console.log(element.name)
+  });
+}
