@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spotify Album Recommendation</title>
 
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <input id="album-name" type="text">
+  <input id="album-name" onchange="_inputChanged()"  oninput="this.onchange()" onpaste="this.onchange()" type="text">
   <ul id="album-list">
-    <li><img src="" alt="">Name</li>
+    <li><button><img src="" alt="">Name</button></li>
   </ul>
 </body>
 </html>

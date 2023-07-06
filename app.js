@@ -1,6 +1,15 @@
 const clientID = `9d7a9d996a9e4912b8cc59d93b12d6d9`
 const clienSecret = `f85f99af209742c49fc0c918ab2e6475`
 
+let myToken
+let tokenState
+
+
+let albumItem = document.createElement('li')
+const albumList = document.querySelector('#album-list')
+const albumButton = document.createElement('button')
+const tempoAlbumName = document.createElement('img')
+
 
 const _getToken = async () => {
 
@@ -37,12 +46,36 @@ const _searchAlbum = async (token, albumName) => {
 }
 
 const list = document.querySelector('#album-list')
-const albumItem = document.createElement('li')
-const tempoAlbumName = document.createElement('img')
+const albumInputName = document.querySelector('#album-name')
+
+function _inputChanged(){
+  if(tokenState){
+    _searchAlbum(myToken, albumInputName.value)
+    .then(data => {
+      albumList.innerHTML = ""
+      data.albums.items.forEach(element => {
+        
+
+        albumItem = document.createElement('li')
+        albumItem.innerHTML = element.name
+        console.log(albumItem)
+        albumList.appendChild(albumItem)
+      })
+    })
+  }
+  else {
+    alert('Seu token ainda não foi gerado, aguarde alguns segundos!')
+  }
+}
+
 
 _getToken()
-.then(data => _searchAlbum(data, 'The White Album'))
-.then(data => displayAlbums(data.albums.items))
+.then(data => {
+  myToken = data
+  tokenState = true
+  console.log('Token recebido')
+})
+
 
 
 
