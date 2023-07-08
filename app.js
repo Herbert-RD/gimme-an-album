@@ -56,8 +56,12 @@ function _inputChanged(){
       data.albums.items.forEach(element => {
         
 
-        albumItem = document.createElement('li')
+        albumItem = document.createElement('button')
         albumItem.innerHTML = element.name
+        albumItem.id = element.name
+        albumItem.onclick = _albumSelect(albumItem.id, element.)
+
+
         console.log(albumItem)
         albumList.appendChild(albumItem)
       })
@@ -66,6 +70,10 @@ function _inputChanged(){
   else {
     alert('Seu token ainda não foi gerado, aguarde alguns segundos!')
   }
+}
+
+function _albumSelect(name, url) {
+  name
 }
 
 
